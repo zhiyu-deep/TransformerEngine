@@ -16,8 +16,8 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 endif()
 
 # Hide non-necessary symbols in shared object.
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/libtransformer_engine.version")
-set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/libtransformer_engine.version")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/libtransformer_engine.version")
+#set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Wl,--version-script=${CMAKE_CURRENT_SOURCE_DIR}/libtransformer_engine.version")
 
 # Transformer Engine library
 project(transformer_engine LANGUAGES CUDA CXX)
@@ -30,14 +30,14 @@ endif()
 
 # cuDNN frontend API
 set(CUDNN_FRONTEND_INCLUDE_DIR
-    "${CMAKE_SOURCE_DIR}/../../3rdparty/cudnn-frontend/include")
+    "${PROJECT_SOURCE_DIR}/../../3rdparty/cudnn-frontend/include")
 if(NOT EXISTS "${CUDNN_FRONTEND_INCLUDE_DIR}")
     message(FATAL_ERROR
             "Could not find cuDNN frontend API. "
             "Try running 'git submodule update --init --recursive' "
             "within the Transformer Engine source.")
 endif()
-include(${CMAKE_SOURCE_DIR}/../../3rdparty/cudnn-frontend/cmake/cuDNN.cmake)
+include(${PROJECT_SOURCE_DIR}/../../3rdparty/cudnn-frontend/cmake/cuDNN.cmake)
 
 # Python
 find_package(Python COMPONENTS Interpreter Development.Module REQUIRED)
